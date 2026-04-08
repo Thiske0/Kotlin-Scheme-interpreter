@@ -4,7 +4,7 @@ import com.github.h0tk3y.betterParse.combinators.map
 import com.github.h0tk3y.betterParse.grammar.Grammar
 import org.apache.commons.text.StringEscapeUtils
 
-class SchemeString(val value: String)
+data class SchemeString(val value: String)
 
 class SchemeStringGrammar : Grammar<SchemeString>() {
 
@@ -16,6 +16,6 @@ class SchemeStringGrammar : Grammar<SchemeString>() {
 
 fun parseString(text: String): String {
     // To unescape the string to handle things like "\n" "\r" etc
-    // TODO: check behaviour on invalid
+    // If invalid just removes the backslash
     return StringEscapeUtils.unescapeJava(text.removeSurrounding("\""))
 }

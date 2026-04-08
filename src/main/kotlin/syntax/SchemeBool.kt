@@ -5,7 +5,7 @@ import com.github.h0tk3y.betterParse.combinators.map
 import com.github.h0tk3y.betterParse.combinators.or
 import com.github.h0tk3y.betterParse.grammar.Grammar
 
-class SchemeBool(val value: Boolean)
+data class SchemeBool(val value: Boolean)
 
 class SchemeBoolGrammar : Grammar<SchemeBool>() {
     override val tokens = Tokens.toList()

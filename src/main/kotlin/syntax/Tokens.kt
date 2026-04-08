@@ -3,9 +3,6 @@ package syntax
 import com.github.h0tk3y.betterParse.lexer.Token
 import com.github.h0tk3y.betterParse.lexer.literalToken
 import com.github.h0tk3y.betterParse.lexer.regexToken
-import kotlin.reflect.full.declaredMemberProperties
-import kotlin.reflect.full.memberProperties
-import kotlin.reflect.jvm.isAccessible
 
 
 object Tokens {
@@ -21,14 +18,18 @@ object Tokens {
     val lpar = literalToken("(")
     val rpar = literalToken(")")
 
-
-    // We use reflection to turn all member fields that are Tokens into a List
     fun toList(): List<Token> {
-        return this::class.declaredMemberProperties
-            .mapNotNull { prop ->
-                prop.isAccessible = true
-                val value = prop.getter.call(this)
-                value as? Token // safe cast
-            }
+        //note: order matters for parsing reasons, most restrictive first
+        return listOf(
+            trueToken,
+            falseToken,
+            lpar,
+            rpar,
+            singleton,
+            number,
+            string,
+            tag,
+            ws,
+        )
     }
 }
