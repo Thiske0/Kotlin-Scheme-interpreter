@@ -27,7 +27,7 @@ class MainTest {
         val tempFile = createTempFile()
         tempFile.writeText("(define (f x)\n" +
                 "  (if x\n" +
-                "      (f 1 (f 4))\n" +
+                "      (f (f 4))\n" +
                 "      (if x\n" +
                 "          (f 1)\n" +
                 "          4)))")
@@ -41,6 +41,48 @@ class MainTest {
             System.setOut(originalOut)
         }
         assertEquals("2\r\n", outputStream.toString())
+    }
+
+    @Test
+    fun `parses other complex file correctly`() {
+        val tempFile = createTempFile()
+        tempFile.writeText("(define (f x)\n" +
+                "  (if x\n" +
+                "      (f (f 4))\n" +
+                "      (if x\n" +
+                "          (f 1 2)\n" +
+                "          4)))")
+        val outputStream = ByteArrayOutputStream()
+        val originalOut = System.out
+        System.setOut(PrintStream(outputStream))
+
+        try {
+            main(arrayOf(tempFile.absolutePathString()))
+        } finally {
+            System.setOut(originalOut)
+        }
+        assertEquals("1\r\n", outputStream.toString())
+    }
+
+    @Test
+    fun `parses third complex file correctly`() {
+        val tempFile = createTempFile()
+        tempFile.writeText("(define (f x)\n" +
+                "  (if x\n" +
+                "      (f 1 (f 4))\n" +
+                "      (if x\n" +
+                "          (f 1)\n" +
+                "          4)))")
+        val outputStream = ByteArrayOutputStream()
+        val originalOut = System.out
+        System.setOut(PrintStream(outputStream))
+
+        try {
+            main(arrayOf(tempFile.absolutePathString()))
+        } finally {
+            System.setOut(originalOut)
+        }
+        assertEquals("1\r\n", outputStream.toString())
     }
 
     @Test
