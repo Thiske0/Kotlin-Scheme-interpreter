@@ -71,4 +71,48 @@ class SchemeTagGrammarTest {
             grammar.parseToEnd(input)
         }
     }
+
+    @Test
+    fun `throws error for tag starting with #`() {
+        var input = "#"
+        assertThrows<ParseException> {
+            grammar.parseToEnd(input)
+        }
+        input = "#g"
+        assertThrows<ParseException> {
+            grammar.parseToEnd(input)
+        }
+        input = "#t9"
+        assertThrows<ParseException> {
+            grammar.parseToEnd(input)
+        }
+    }
+
+    @Test
+    fun `throws error for tag starting with quote`() {
+        var input = "\"d\"d"
+        assertThrows<ParseException> {
+            grammar.parseToEnd(input)
+        }
+        input = "\""
+        assertThrows<ParseException> {
+            grammar.parseToEnd(input)
+        }
+    }
+
+    @Test
+    fun `throws error for tag starting digit or unary minus`() {
+        var input = "-"
+        assertThrows<ParseException> {
+            grammar.parseToEnd(input)
+        }
+        input = "-a"
+        assertThrows<ParseException> {
+            grammar.parseToEnd(input)
+        }
+        input = "9a"
+        assertThrows<ParseException> {
+            grammar.parseToEnd(input)
+        }
+    }
 }

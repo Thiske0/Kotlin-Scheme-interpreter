@@ -12,7 +12,7 @@ object Tokens {
     val falseToken = literalToken("#f")
     val number = regexToken("-?\\d+")
     val singleton = literalToken("'()")
-    val tag = regexToken("[^\\s()]+")
+    val tag = regexToken("[^\\s()\\d-#\"][^\\s()]*") // tags can't start with #, digits, quote, or parentheses, and can't contain whitespace or parentheses
     val string = regexToken("\"([^\"\\\\]|\\\\.)*\"")
     val ws = regexToken("\\s+")
     val lpar = literalToken("(")
