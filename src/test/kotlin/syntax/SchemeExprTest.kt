@@ -14,30 +14,30 @@ class SchemeExprGrammarTest {
     fun `parses simple expression correctly`() {
         val input = "(f)"
         val result = grammar.parseToEnd(input)
-        assertEquals(SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("f"))))), result)
+        assertEquals(SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("f"))))), result)
     }
 
     @Test
     fun `parses long expression correctly`() {
         var input = "(a b c)"
         var result = grammar.parseToEnd(input)
-        assertEquals(SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("a"))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("b"))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("c"))))), result)
+        assertEquals(SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("a"))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("b"))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("c"))))), result)
         input = "(\na \n \rb c\r\t )"
         result = grammar.parseToEnd(input)
-        assertEquals(SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("a"))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("b"))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("c"))))), result)
+        assertEquals(SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("a"))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("b"))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("c"))))), result)
     }
 
     @Test
     fun `parses nested expression correctly`() {
         var input = "(a (b) c)"
         var result = grammar.parseToEnd(input)
-        assertEquals(SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("a"))), SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("b"))))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("c"))))), result)
+        assertEquals(SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("a"))), SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("b"))))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("c"))))), result)
         input = "((a b) c)"
         result = grammar.parseToEnd(input)
-        assertEquals(SchemeExpr.List(listOf(SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("a"))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("b"))))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("c"))))), result)
+        assertEquals(SchemeExpr.List(listOf(SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("a"))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("b"))))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("c"))))), result)
         input = "(a (b c))"
         result = grammar.parseToEnd(input)
-        assertEquals(SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("a"))), SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("b"))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag("c"))))))), result)
+        assertEquals(SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("a"))), SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("b"))), SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable("c"))))))), result)
     }
 
     @Test

@@ -11,17 +11,24 @@ class SchemeTagGrammarTest {
     private val grammar = SchemeTagGrammar()
 
     @Test
+    fun `parses keyword correctly`() {
+        val input = "if"
+        val result = grammar.parseToEnd(input)
+        assertEquals(SchemeTag.Keyword(SchemeKeyword.IF), result)
+    }
+
+    @Test
     fun `parses simple tag correctly`() {
         val input = "sdf"
         val result = grammar.parseToEnd(input)
-        assertEquals(SchemeTag("sdf"), result)
+        assertEquals(SchemeTag.Variable("sdf"), result)
     }
 
     @Test
     fun `parses complex tag correctly`() {
         val input = "fse4sfe./#sdf_9"
         val result = grammar.parseToEnd(input)
-        assertEquals(SchemeTag("fse4sfe./#sdf_9"), result)
+        assertEquals(SchemeTag.Variable("fse4sfe./#sdf_9"), result)
     }
 
     @Test

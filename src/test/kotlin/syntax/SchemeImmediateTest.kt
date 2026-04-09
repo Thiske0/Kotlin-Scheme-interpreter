@@ -14,7 +14,7 @@ class SchemeImmediateGrammarTest {
     fun `parses tag correctly`() {
         val input = "sdf"
         val result = grammar.parseToEnd(input)
-        assertEquals(SchemeImmediate.Tag(SchemeTag("sdf")), result)
+        assertEquals(SchemeImmediate.Tag(SchemeTag.Variable("sdf")), result)
     }
 
     @Test

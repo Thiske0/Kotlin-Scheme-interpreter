@@ -11,7 +11,7 @@ class SchemeProgramGrammarTest {
     private val grammar = SchemeProgramGrammar()
 
     fun makeSimpleExpression(tag: String): SchemeExpr {
-        return SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag(tag)))))
+        return SchemeExpr.List(listOf(SchemeExpr.Immediate(SchemeImmediate.Tag(SchemeTag.Variable(tag)))))
     }
 
     @Test
