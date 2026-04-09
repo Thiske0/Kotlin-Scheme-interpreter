@@ -18,4 +18,4 @@ Pass the filepath of the program to count as the first and only commandline argu
 calls itself tail-recursively 1 times.
 - `(f 1 (f 4))` is in a tail-call position but the number of arguments is not the same so does not count.
 - the inner `(f 4)` is not in a tail-call position so does not count.
-- `(f 1 (f 4))` is in a tail-call position and has the same number of arguments so is a proper tail recursive call.
+- `(f 1)` is in a tail-call position and has the same number of arguments so is a proper tail recursive call.
